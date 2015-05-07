@@ -1,0 +1,16 @@
+FROM golang
+MAINTAINER Mark Pleskac
+
+# Copy the local package files to the container's workspace.
+ADD . /go/src/github.com/pleskac/SpotLocator
+
+# Build the outyet command inside the container.
+# (You may fetch or manage dependencies here,
+# either manually or with a tool like "godep".)
+RUN go install github.com/pleskac/SpotLocator
+
+# Run the outyet command by default when the container starts.
+ENTRYPOINT /go/bin/SpotLocator
+
+# Document that the service listens on port 8080.
+EXPOSE 8080
